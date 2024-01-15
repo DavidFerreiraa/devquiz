@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+final dificults = ["Fácil", "Médio", "Difícil", "Perito"];
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -16,15 +18,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBarWidget(),
       body: SizedBox(
         height: 36,
-        child: ListView(
+        child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return SizedBox(width: 5);
+          },
           padding: EdgeInsets.symmetric(horizontal: 20),
           scrollDirection: Axis.horizontal,
-          children: [
-            LevelButtonWidget(label: "Fácil"),
-            LevelButtonWidget(label: "Médio"),
-            LevelButtonWidget(label: "Difícil"),
-            LevelButtonWidget(label: "Perito"),
-          ],
+          itemCount: dificults.length,
+          itemBuilder: (context, index) {
+            return LevelButtonWidget(label: dificults[index]);
+          },
         ),
       )
     );
